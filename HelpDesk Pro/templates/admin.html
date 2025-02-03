@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <h1>Admin Panel</h1>
+    <table border="1">
+        <tr>
+            <th>Employee Name</th>
+            <th>Problem Title</th>
+            <th>Description</th>
+            <th>Created At</th>
+            <th>Status</th>
+            <th>Action</th>
+        </tr>
+        {% for problem in problems %}
+            <tr>
+                <td>{{ problem[1] }}</td>
+                <td>{{ problem[2] }}</td>
+                <td>{{ problem[3] }}</td>
+                <td>{{ problem[4] }}</td>
+                <td>{{ problem[5] }}</td>
+                <td>
+                    <form action="/update_status/{{ problem[0] }}" method="post">
+                        <select name="status">
+                            <option value="Raised">Raised</option>
+                            <option value="In Progress">In Progress</option>
+                            <option value="Resolved">Resolved</option>
+                        </select>
+                        <textarea name="comment" placeholder="Admin Comment"></textarea>
+                        <button type="submit">Update</button>
+                    </form>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

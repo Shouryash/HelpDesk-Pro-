@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <h1>Welcome to Your Dashboard</h1>
+    <h2>Raise a Problem</h2>
+    <form action="/raise_problem" method="post">
+        <label for="title">Title:</label>
+        <input type="text" id="title" name="title" required><br>
+        <label for="description">Description:</label>
+        <textarea id="description" name="description" required></textarea><br>
+        <button type="submit">Submit</button>
+    </form>
+
+    <h2>Your Problems</h2>
+    <ul>
+        {% for problem in problems %}
+            <li>
+                <strong>{{ problem[2] }}</strong> - {{ problem[3] }} ({{ problem[4] }})
+            </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
